@@ -1,12 +1,10 @@
 public class Node {
     String buildingName;
-    Pair xBound;
-    Pair yBound;
+    Neighbor[] neighbors;
 
-    public Node(String name, Pair x, Pair y) {
+    public Node(String name, Neighbor[] n) {
         buildingName = name;
-        xBound = x;
-        yBound = y;
+        neighbors = n;
     }
 }
 
