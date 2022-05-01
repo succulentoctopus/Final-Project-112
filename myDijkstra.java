@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class myDijkstra {
 
-    public ArrayList<Building> createPaths(String s, ArrayList<Building> totalBuildings) {
+    public ArrayList<Building> createPaths(String s, ArrayList<Building> totalBuildings, ArrayList<Neighbor> totalNeighbors) {
         //create list of unvisited vertices
         ArrayList<String> visitedBuildings = new ArrayList<String>();
 
@@ -11,6 +11,9 @@ public class myDijkstra {
 
         //create list of buildings
         ArrayList<Building> table = new ArrayList<Building>(unvisitedBuildings.size());
+
+        //create a list of neighbors
+        ArrayList<Neighbor> neighbors = totalNeighbors;
 
 
         /*
@@ -53,13 +56,16 @@ public class myDijkstra {
         }
 
         //create the possible paths in table
+        int arrayIndex = 0;
         for (int i = startIndex%unvisitedBuildings.size(); i < startIndex; i++) {
             for (int j = 0; j < unvisitedBuildings.size(); j++) {
-                if (unvisitedBuildings.get(i).name =)
+                if (unvisitedBuildings.get(i).name == neighbors.get(i).neighbor) {
+                    unvisitedBuildings.get(i).setNeighbor(neighbors.get(i), arrayIndex);
+                    arrayIndex++;
+                }
             }
+            arrayIndex = 0;
         }
-
-
 
         return table;
 
@@ -67,8 +73,8 @@ public class myDijkstra {
 
 
 
-    public ArrayList<String> getShortestPath(String startingPoint, String finalDestination) {
-        ArrayList<Building> possiblePaths = createPaths(startingPoint, 30);
+    public ArrayList<String> getShortestPath(String startingPoint, String finalDestination, String s, ArrayList<Building> totalBuildings, ArrayList<Neighbor> totalNeighbors) {
+        ArrayList<Building> possiblePaths = createPaths(s, totalBuildings, totalNeighbors);
         ArrayList<String> shortestPath = new ArrayList<String>();
         int totalDistance = 0;
 
@@ -76,10 +82,10 @@ public class myDijkstra {
 
         String locationName = startingPoint;
 
-        while (locationName != finalDestination) {
+        //find starting building
+        for (int i = 0; i < )
 
-        }
-
+        System.out.println(totalDistance);
         return shortestPath;
 
     }

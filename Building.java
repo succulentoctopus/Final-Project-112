@@ -7,5 +7,9 @@ public class Building {
         neighbors = n1;
     }
 
+    public void setNeighbor(Neighbor n, int index) {
+        this.neighbors[index] = n;
+    }
+
 
 }
