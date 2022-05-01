@@ -2,15 +2,15 @@ import java.util.ArrayList;
 
 public class myDijkstra {
 
-    public ArrayList<Building> createPaths(String s, int numBuildings) {
+    public ArrayList<Building> createPaths(String s, ArrayList<Building> totalBuildings) {
         //create list of unvisited vertices
         ArrayList<String> visitedBuildings = new ArrayList<String>();
 
         //create list of visited vertices
-        ArrayList<String> unvisitedBuildings = new ArrayList<String>(numBuildings);
+        ArrayList<Building> unvisitedBuildings = totalBuildings;
 
         //create list of buildings
-        ArrayList<Building> table = new ArrayList<Building>(numBuildings);
+        ArrayList<Building> table = new ArrayList<Building>(unvisitedBuildings.size());
 
 
         /*
@@ -33,17 +33,19 @@ public class myDijkstra {
 
          */
 
-        //find the starting building
-        Neighbor[] startNeighbors = new Neighbor[numBuildings];
+        //find the starting building and initialize rest of table
+        //create an empty Neighbor array that will be used to initalize every Building
+        Neighbor[] startNeighbors = new Neighbor[unvisitedBuildings.size()];
         Building startBuilding = new Building(s, startNeighbors);
+        //startIndex will be used
         int startIndex = 0;
         for (int i = 0; i < unvisitedBuildings.size(); i++) {
-            if (unvisitedBuildings.get(i) == s) {
+            if (unvisitedBuildings.get(i).name == s) {
                 table.set(0, startBuilding);
                 startIndex = i;
-                for (int j = i%numBuildings; j < i; j++) {
-
-                    table.set(, )
+                for (int j = i%unvisitedBuildings.size(); j < i; j++) {
+                    Building currBuilding = new Building(unvisitedBuildings.get(j).name, startNeighbors);
+                    table.set(j-i, currBuilding);
                 }
                 break;
             }
@@ -51,9 +53,9 @@ public class myDijkstra {
         }
 
         //create the possible paths in table
-        for (int i = startIndex%numBuildings; i < startIndex; i++) {
+        for (int i = startIndex%unvisitedBuildings.size(); i < startIndex; i++) {
             for (int j = 0; j < unvisitedBuildings.size(); j++) {
-                if ()
+                if (unvisitedBuildings.get(i).name =)
             }
         }
 
