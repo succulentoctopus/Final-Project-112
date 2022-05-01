@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class myDijkstra {
 
-    public void createPaths(String s, int numBuildings) {
+    public ArrayList<Building> createPaths(String s, int numBuildings) {
         //create list of unvisited vertices
         ArrayList<String> visitedBuildings = new ArrayList<String>();
 
@@ -28,19 +28,26 @@ public class myDijkstra {
             }
         }
 
+        return table;
+
     }
 
+
+
     public ArrayList<String> getShortestPath(String startingPoint, String finalDestination) {
-        ArrayList<String> path = new ArrayList<String>();
-        path.add(0, finalDestination);
+        ArrayList<Building> possiblePaths = createPaths(startingPoint, 30);
+        ArrayList<String> shortestPath = new ArrayList<String>();
+        int totalDistance = 0;
 
-        String locationName = finalDestination;
+        shortestPath.add(0, startingPoint);
 
-        while (locationName != startingPoint) {
+        String locationName = startingPoint;
+
+        while (locationName != finalDestination) {
 
         }
 
-        return path;
+        return shortestPath;
 
     }
 }
