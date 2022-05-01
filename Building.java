@@ -1,12 +1,10 @@
 public class Building {
     String name;
-    int distance;
-    String prev;
+    Neighbor[] neighbors;
 
-    public Building(String n, int d, String p) {
+    public Building(String n, Neighbor[] n1) {
         name = n;
-        distance = d;
-        prev = p;
+        neighbors = n1;
     }
 
 

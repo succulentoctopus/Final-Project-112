@@ -11,6 +11,9 @@ public class myDijkstra {
 
         //create list of buildings
         ArrayList<Building> table = new ArrayList<Building>(numBuildings);
+
+
+        /*
         table.get(0).distance = 0;
         table.get(0).prev = table.get(0).name;
 
@@ -27,6 +30,34 @@ public class myDijkstra {
 
             }
         }
+
+         */
+
+        //find the starting building
+        Neighbor[] startNeighbors = new Neighbor[numBuildings];
+        Building startBuilding = new Building(s, startNeighbors);
+        int startIndex = 0;
+        for (int i = 0; i < unvisitedBuildings.size(); i++) {
+            if (unvisitedBuildings.get(i) == s) {
+                table.set(0, startBuilding);
+                startIndex = i;
+                for (int j = i%numBuildings; j < i; j++) {
+
+                    table.set(, )
+                }
+                break;
+            }
+
+        }
+
+        //create the possible paths in table
+        for (int i = startIndex%numBuildings; i < startIndex; i++) {
+            for (int j = 0; j < unvisitedBuildings.size(); j++) {
+                if ()
+            }
+        }
+
+
 
         return table;
 

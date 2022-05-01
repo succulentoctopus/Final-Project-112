@@ -1,4 +1,5 @@
 public class Node {
+    //Do not need this class
     String buildingName;
     Neighbor[] neighbors;
 

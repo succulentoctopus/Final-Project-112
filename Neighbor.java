@@ -1,7 +1,7 @@
 public class Neighbor {
-    Node neighbor;
+    String neighbor;
     double edgeLength;
-    public Neighbor(Node n, double e) {
+    public Neighbor(String n, double e) {
         neighbor = n;
         edgeLength = e;
     }
