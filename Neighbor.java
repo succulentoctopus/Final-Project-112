@@ -1,8 +1,8 @@
 public class Neighbor {
-    String neighbor;
-    double edgeLength;
-    public Neighbor(String n, double e) {
-        neighbor = n;
+    String nameNeighbor;
+    int edgeLength;
+    public Neighbor(String n, int e) {
+        nameNeighbor = n;
         edgeLength = e;
     }
 }
