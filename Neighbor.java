@@ -5,4 +5,8 @@ public class Neighbor {
         nameNeighbor = n;
         edgeLength = e;
     }
+
+    public String toString() {
+        return this.nameNeighbor + " " + edgeLength + " ";
+    }
 }

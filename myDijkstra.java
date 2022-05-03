@@ -11,44 +11,87 @@ public class myDijkstra {
 
     public static void main(String[] args) {
         createPaths();
+        String str = "thisBuilding A";
+        String[] arrOfStr = str.split(" ",2);
+        for (String s : arrOfStr) {
+            System.out.println(s);
+        }
+        World w = new World("Tester");
+        for (Building b : w.totalBuildings) {
+            System.out.println(b);
+        }
+
     }
 
 
 //public ArrayList<Building> createPaths(String s, ArrayList<Building> totalBuildings, ArrayList<Neighbor> totalNeighbors) {
     public static void createPaths() {
-        Neighbor[] Aneighbors = new Neighbor[3];
-        Aneighbors[0] = new Neighbor("B", 10);
-        Aneighbors[1] = new Neighbor("F", 20);
-        Aneighbors[2] = new Neighbor("E",2);
+        ArrayList<Neighbor> Aneighbors = new ArrayList<Neighbor>();
+        Aneighbors.add(new Neighbor("B", 10));
+        Aneighbors.add(new Neighbor("F", 20));
+        Aneighbors.add(new Neighbor("E",2));
         A = new Building ("A", Aneighbors);
 
-        Neighbor[] Bneighbors = new Neighbor[3];
-        Bneighbors[0] = new Neighbor("A", 10);
-        Bneighbors[1] = new Neighbor("E", 5);
-        Bneighbors[2] = new Neighbor("C", 5);
+        ArrayList<Neighbor> Bneighbors = new ArrayList<Neighbor>();
+        Bneighbors.add(new Neighbor("A", 10));
+        Bneighbors.add(new Neighbor("E", 5));
+        Bneighbors.add(new Neighbor("C", 5));
         B = new Building ("B", Bneighbors);
 
-        Neighbor[] Cneighbors = new Neighbor[2];
-        Cneighbors[0] = new Neighbor("D", 2);
-        Cneighbors[1] = new Neighbor("B", 5);
+        ArrayList<Neighbor> Cneighbors = new ArrayList<Neighbor>();
+        Cneighbors.add(new Neighbor("D", 2));
+        Cneighbors.add(new Neighbor("B", 5));
         C = new Building ("C", Cneighbors);
 
-        Neighbor[] Dneighbors = new Neighbor[3];
-        Dneighbors[0] = new Neighbor("C", 2);
-        Dneighbors[1] = new Neighbor("E", 8);
-        Dneighbors[2] = new Neighbor("F", 14);
+        ArrayList<Neighbor> Dneighbors = new ArrayList<Neighbor>();
+        Dneighbors.add(new Neighbor("C", 2));
+        Dneighbors.add(new Neighbor("E", 8));
+        Dneighbors.add(new Neighbor("F", 14));
         D = new Building ("D", Dneighbors);
 
-        Neighbor[] Eneighbors = new Neighbor[3];
-        Eneighbors[0] = new Neighbor("B", 5);
-        Eneighbors[1] = new Neighbor("A", 2);
-        Eneighbors[2] = new Neighbor("D", 8);
+        ArrayList<Neighbor> Eneighbors = new ArrayList<Neighbor>();
+        Eneighbors.add(new Neighbor("B", 5));
+        Eneighbors.add(new Neighbor("A", 2));
+        Eneighbors.add(new Neighbor("D", 8));
         E = new Building ("E", Eneighbors);
 
-        Neighbor[] Fneighbors = new Neighbor[2];
-        Fneighbors[0] = new Neighbor("A", 20);
-        Fneighbors[1] = new Neighbor("D", 14);
+        ArrayList<Neighbor> Fneighbors = new ArrayList<Neighbor>();
+        Fneighbors.add(new Neighbor("A", 20));
+        Fneighbors.add(new Neighbor("D", 14));
         F = new Building ("F", Fneighbors);
+//        Neighbor[] Aneighbors = new Neighbor[3];
+//        Aneighbors[0] = new Neighbor("B", 10);
+//        Aneighbors[1] = new Neighbor("F", 20);
+//        Aneighbors[2] = new Neighbor("E",2);
+//        A = new Building ("A", Aneighbors);
+//
+//        Neighbor[] Bneighbors = new Neighbor[3];
+//        Bneighbors[0] = new Neighbor("A", 10);
+//        Bneighbors[1] = new Neighbor("E", 5);
+//        Bneighbors[2] = new Neighbor("C", 5);
+//        B = new Building ("B", Bneighbors);
+//
+//        Neighbor[] Cneighbors = new Neighbor[2];
+//        Cneighbors[0] = new Neighbor("D", 2);
+//        Cneighbors[1] = new Neighbor("B", 5);
+//        C = new Building ("C", Cneighbors);
+//
+//        Neighbor[] Dneighbors = new Neighbor[3];
+//        Dneighbors[0] = new Neighbor("C", 2);
+//        Dneighbors[1] = new Neighbor("E", 8);
+//        Dneighbors[2] = new Neighbor("F", 14);
+//        D = new Building ("D", Dneighbors);
+//
+//        Neighbor[] Eneighbors = new Neighbor[3];
+//        Eneighbors[0] = new Neighbor("B", 5);
+//        Eneighbors[1] = new Neighbor("A", 2);
+//        Eneighbors[2] = new Neighbor("D", 8);
+//        E = new Building ("E", Eneighbors);
+//
+//        Neighbor[] Fneighbors = new Neighbor[2];
+//        Fneighbors[0] = new Neighbor("A", 20);
+//        Fneighbors[1] = new Neighbor("D", 14);
+//        F = new Building ("F", Fneighbors);
 
 
 
