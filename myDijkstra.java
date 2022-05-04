@@ -1,137 +1,44 @@
 import java.util.ArrayList;
 
 public class myDijkstra {
-    static Building A;
-    static Building B;
-    static Building C;
-    static Building D;
-    static Building E;
-    static Building F;
+//    static Building A;
+//    static Building B;
+//    static Building C;
+//    static Building D;
+//    static Building E;
+//    static Building F;
 
 
     public static void main(String[] args) {
-        createPaths();
+        World w = new World("Tester");
+        createPaths(w,w.totalBuildings.get(0));
         String str = "thisBuilding A";
         String[] arrOfStr = str.split(" ",2);
         for (String s : arrOfStr) {
             System.out.println(s);
         }
-        World w = new World("Tester");
+
         for (Building b : w.totalBuildings) {
             System.out.println(b);
         }
 
     }
-
-
-//public ArrayList<Building> createPaths(String s, ArrayList<Building> totalBuildings, ArrayList<Neighbor> totalNeighbors) {
-    public static void createPaths() {
-        ArrayList<Neighbor> Aneighbors = new ArrayList<Neighbor>();
-        Aneighbors.add(new Neighbor("B", 10));
-        Aneighbors.add(new Neighbor("F", 20));
-        Aneighbors.add(new Neighbor("E",2));
-        A = new Building ("A", Aneighbors);
-
-        ArrayList<Neighbor> Bneighbors = new ArrayList<Neighbor>();
-        Bneighbors.add(new Neighbor("A", 10));
-        Bneighbors.add(new Neighbor("E", 5));
-        Bneighbors.add(new Neighbor("C", 5));
-        B = new Building ("B", Bneighbors);
-
-        ArrayList<Neighbor> Cneighbors = new ArrayList<Neighbor>();
-        Cneighbors.add(new Neighbor("D", 2));
-        Cneighbors.add(new Neighbor("B", 5));
-        C = new Building ("C", Cneighbors);
-
-        ArrayList<Neighbor> Dneighbors = new ArrayList<Neighbor>();
-        Dneighbors.add(new Neighbor("C", 2));
-        Dneighbors.add(new Neighbor("E", 8));
-        Dneighbors.add(new Neighbor("F", 14));
-        D = new Building ("D", Dneighbors);
-
-        ArrayList<Neighbor> Eneighbors = new ArrayList<Neighbor>();
-        Eneighbors.add(new Neighbor("B", 5));
-        Eneighbors.add(new Neighbor("A", 2));
-        Eneighbors.add(new Neighbor("D", 8));
-        E = new Building ("E", Eneighbors);
-
-        ArrayList<Neighbor> Fneighbors = new ArrayList<Neighbor>();
-        Fneighbors.add(new Neighbor("A", 20));
-        Fneighbors.add(new Neighbor("D", 14));
-        F = new Building ("F", Fneighbors);
-//        Neighbor[] Aneighbors = new Neighbor[3];
-//        Aneighbors[0] = new Neighbor("B", 10);
-//        Aneighbors[1] = new Neighbor("F", 20);
-//        Aneighbors[2] = new Neighbor("E",2);
-//        A = new Building ("A", Aneighbors);
-//
-//        Neighbor[] Bneighbors = new Neighbor[3];
-//        Bneighbors[0] = new Neighbor("A", 10);
-//        Bneighbors[1] = new Neighbor("E", 5);
-//        Bneighbors[2] = new Neighbor("C", 5);
-//        B = new Building ("B", Bneighbors);
-//
-//        Neighbor[] Cneighbors = new Neighbor[2];
-//        Cneighbors[0] = new Neighbor("D", 2);
-//        Cneighbors[1] = new Neighbor("B", 5);
-//        C = new Building ("C", Cneighbors);
-//
-//        Neighbor[] Dneighbors = new Neighbor[3];
-//        Dneighbors[0] = new Neighbor("C", 2);
-//        Dneighbors[1] = new Neighbor("E", 8);
-//        Dneighbors[2] = new Neighbor("F", 14);
-//        D = new Building ("D", Dneighbors);
-//
-//        Neighbor[] Eneighbors = new Neighbor[3];
-//        Eneighbors[0] = new Neighbor("B", 5);
-//        Eneighbors[1] = new Neighbor("A", 2);
-//        Eneighbors[2] = new Neighbor("D", 8);
-//        E = new Building ("E", Eneighbors);
-//
-//        Neighbor[] Fneighbors = new Neighbor[2];
-//        Fneighbors[0] = new Neighbor("A", 20);
-//        Fneighbors[1] = new Neighbor("D", 14);
-//        F = new Building ("F", Fneighbors);
-
-
-
-
-        //create list of unvisited vertices
-        ArrayList<Building> visitedBuildings = new ArrayList<Building>();
+    public static void createPaths(World w, Building start) {
 
         //create list of visited vertices
-//        ArrayList<Building> unvisitedBuildings = totalBuildings;
-        ArrayList<Building> unvisitedBuildings = new ArrayList<Building>();
-        unvisitedBuildings.add(A);
-        unvisitedBuildings.add(B);
-        unvisitedBuildings.add(C);
-        unvisitedBuildings.add(D);
-        unvisitedBuildings.add(E);
-        unvisitedBuildings.add(F);
+        ArrayList<Building> visitedBuildings = new ArrayList<Building>();
+        //create list of unvisited vertices
+        ArrayList<Building> unvisitedBuildings = w.totalBuildings;
 
-
-        //create list of buildings
+        //Create BuildingDirection table
         ArrayList<BuildingDirection> table = new ArrayList<BuildingDirection>(unvisitedBuildings.size());
-        BuildingDirection Adirection = new BuildingDirection(A, 0, A);
-        BuildingDirection Bdirection = new BuildingDirection(B, 100, null);
-        BuildingDirection Cdirection = new BuildingDirection(C, 100, null);
-        BuildingDirection Ddirection = new BuildingDirection(D, 100, null);
-        BuildingDirection Edirection = new BuildingDirection(E, 100, null);
-        BuildingDirection Fdirection = new BuildingDirection(F, 100, null);
-        table.add(Adirection);
-        table.add(Bdirection);
-        table.add(Cdirection);
-        table.add(Ddirection);
-        table.add(Edirection);
-        table.add(Fdirection);
+        table.add(new BuildingDirection(start, 0, start));
+        unvisitedBuildings.remove(start);
+        for (Building b : unvisitedBuildings) {
+            table.add(new BuildingDirection(b, 1000, null));
+        }
+        unvisitedBuildings.add(start);
 
-        //Currently not needed
-//        ArrayList<String> tableNames = new ArrayList<String>();
-//        for (BuildingDirection bd : table) {
-//            tableNames.add(bd.building.name);
-//        }
-        int i = 6;
-        //unvisitedBuildings.size() > 0
         while (unvisitedBuildings.size() > 0) {
             ArrayList<String> unvisitedBuildingsNames = new ArrayList<String>();
             for (Building b : unvisitedBuildings) {
@@ -149,15 +56,11 @@ public class myDijkstra {
             }
 
             for (Neighbor n : currentBuilding.neighbors) {
-//                System.out.println("mitch");
                 if (unvisitedBuildingsNames.contains(n.nameNeighbor)) {
                     for (BuildingDirection b : table) {
-//                        System.out.println("fool");
                         if (b.building.name.equals(n.nameNeighbor)) {
                             for (BuildingDirection bd : table) {
-//                                System.out.println("mike");
                                 if (bd.building.name.equals(currentBuilding.name)) {
-//                                    System.out.println("yo mama");
                                     int proposedDistance = bd.distanceStart + n.edgeLength;
                                     if (proposedDistance < b.distanceStart) {
                                         b.distanceStart = proposedDistance;
@@ -177,9 +80,165 @@ public class myDijkstra {
             System.out.println(bd.building.name + ": shortest distance from A is: " + bd.distanceStart);
             System.out.println("The previous building is: " + bd.prevBuilding.name);
         }
-
-
     }
+
+
+//public ArrayList<Building> createPaths(String s, ArrayList<Building> totalBuildings, ArrayList<Neighbor> totalNeighbors) {
+//    public static void createPaths() {
+//        ArrayList<Neighbor> Aneighbors = new ArrayList<Neighbor>();
+//        Aneighbors.add(new Neighbor("B", 10));
+//        Aneighbors.add(new Neighbor("F", 20));
+//        Aneighbors.add(new Neighbor("E",2));
+//        A = new Building ("A", Aneighbors);
+//
+//        ArrayList<Neighbor> Bneighbors = new ArrayList<Neighbor>();
+//        Bneighbors.add(new Neighbor("A", 10));
+//        Bneighbors.add(new Neighbor("E", 5));
+//        Bneighbors.add(new Neighbor("C", 5));
+//        B = new Building ("B", Bneighbors);
+//
+//        ArrayList<Neighbor> Cneighbors = new ArrayList<Neighbor>();
+//        Cneighbors.add(new Neighbor("D", 2));
+//        Cneighbors.add(new Neighbor("B", 5));
+//        C = new Building ("C", Cneighbors);
+//
+//        ArrayList<Neighbor> Dneighbors = new ArrayList<Neighbor>();
+//        Dneighbors.add(new Neighbor("C", 2));
+//        Dneighbors.add(new Neighbor("E", 8));
+//        Dneighbors.add(new Neighbor("F", 14));
+//        D = new Building ("D", Dneighbors);
+//
+//        ArrayList<Neighbor> Eneighbors = new ArrayList<Neighbor>();
+//        Eneighbors.add(new Neighbor("B", 5));
+//        Eneighbors.add(new Neighbor("A", 2));
+//        Eneighbors.add(new Neighbor("D", 8));
+//        E = new Building ("E", Eneighbors);
+//
+//        ArrayList<Neighbor> Fneighbors = new ArrayList<Neighbor>();
+//        Fneighbors.add(new Neighbor("A", 20));
+//        Fneighbors.add(new Neighbor("D", 14));
+//        F = new Building ("F", Fneighbors);
+////        Neighbor[] Aneighbors = new Neighbor[3];
+////        Aneighbors[0] = new Neighbor("B", 10);
+////        Aneighbors[1] = new Neighbor("F", 20);
+////        Aneighbors[2] = new Neighbor("E",2);
+////        A = new Building ("A", Aneighbors);
+////
+////        Neighbor[] Bneighbors = new Neighbor[3];
+////        Bneighbors[0] = new Neighbor("A", 10);
+////        Bneighbors[1] = new Neighbor("E", 5);
+////        Bneighbors[2] = new Neighbor("C", 5);
+////        B = new Building ("B", Bneighbors);
+////
+////        Neighbor[] Cneighbors = new Neighbor[2];
+////        Cneighbors[0] = new Neighbor("D", 2);
+////        Cneighbors[1] = new Neighbor("B", 5);
+////        C = new Building ("C", Cneighbors);
+////
+////        Neighbor[] Dneighbors = new Neighbor[3];
+////        Dneighbors[0] = new Neighbor("C", 2);
+////        Dneighbors[1] = new Neighbor("E", 8);
+////        Dneighbors[2] = new Neighbor("F", 14);
+////        D = new Building ("D", Dneighbors);
+////
+////        Neighbor[] Eneighbors = new Neighbor[3];
+////        Eneighbors[0] = new Neighbor("B", 5);
+////        Eneighbors[1] = new Neighbor("A", 2);
+////        Eneighbors[2] = new Neighbor("D", 8);
+////        E = new Building ("E", Eneighbors);
+////
+////        Neighbor[] Fneighbors = new Neighbor[2];
+////        Fneighbors[0] = new Neighbor("A", 20);
+////        Fneighbors[1] = new Neighbor("D", 14);
+////        F = new Building ("F", Fneighbors);
+//
+//
+//
+//
+//        //create list of unvisited vertices
+//        ArrayList<Building> visitedBuildings = new ArrayList<Building>();
+//
+//        //create list of visited vertices
+////        ArrayList<Building> unvisitedBuildings = totalBuildings;
+//        ArrayList<Building> unvisitedBuildings = new ArrayList<Building>();
+//        unvisitedBuildings.add(A);
+//        unvisitedBuildings.add(B);
+//        unvisitedBuildings.add(C);
+//        unvisitedBuildings.add(D);
+//        unvisitedBuildings.add(E);
+//        unvisitedBuildings.add(F);
+//
+//
+//        //create list of buildings
+//        ArrayList<BuildingDirection> table = new ArrayList<BuildingDirection>(unvisitedBuildings.size());
+//        BuildingDirection Adirection = new BuildingDirection(A, 0, A);
+//        BuildingDirection Bdirection = new BuildingDirection(B, 100, null);
+//        BuildingDirection Cdirection = new BuildingDirection(C, 100, null);
+//        BuildingDirection Ddirection = new BuildingDirection(D, 100, null);
+//        BuildingDirection Edirection = new BuildingDirection(E, 100, null);
+//        BuildingDirection Fdirection = new BuildingDirection(F, 100, null);
+//        table.add(Adirection);
+//        table.add(Bdirection);
+//        table.add(Cdirection);
+//        table.add(Ddirection);
+//        table.add(Edirection);
+//        table.add(Fdirection);
+//
+//        //Currently not needed
+////        ArrayList<String> tableNames = new ArrayList<String>();
+////        for (BuildingDirection bd : table) {
+////            tableNames.add(bd.building.name);
+////        }
+//        int i = 6;
+//        //unvisitedBuildings.size() > 0
+//        while (unvisitedBuildings.size() > 0) {
+//            ArrayList<String> unvisitedBuildingsNames = new ArrayList<String>();
+//            for (Building b : unvisitedBuildings) {
+//                unvisitedBuildingsNames.add(b.name);
+//            }
+//            Building currentBuilding = null;
+//            int furthestDistance = 99999;
+//            for (BuildingDirection b : table) {
+//                if (! visitedBuildings.contains(b.building)) {
+//                    if (b.distanceStart < furthestDistance) {
+//                        furthestDistance = b.distanceStart;
+//                        currentBuilding = b.building;
+//                    }
+//                }
+//            }
+//
+//            for (Neighbor n : currentBuilding.neighbors) {
+////                System.out.println("mitch");
+//                if (unvisitedBuildingsNames.contains(n.nameNeighbor)) {
+//                    for (BuildingDirection b : table) {
+////                        System.out.println("fool");
+//                        if (b.building.name.equals(n.nameNeighbor)) {
+//                            for (BuildingDirection bd : table) {
+////                                System.out.println("mike");
+//                                if (bd.building.name.equals(currentBuilding.name)) {
+////                                    System.out.println("yo mama");
+//                                    int proposedDistance = bd.distanceStart + n.edgeLength;
+//                                    if (proposedDistance < b.distanceStart) {
+//                                        b.distanceStart = proposedDistance;
+//                                        b.prevBuilding = currentBuilding;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            visitedBuildings.add(currentBuilding);
+//            unvisitedBuildings.remove(currentBuilding);
+//        }
+//
+//        for (BuildingDirection bd : table) {
+//            System.out.println(bd.building.name + ": shortest distance from A is: " + bd.distanceStart);
+//            System.out.println("The previous building is: " + bd.prevBuilding.name);
+//        }
+//
+//
+//    }
 
 
 
