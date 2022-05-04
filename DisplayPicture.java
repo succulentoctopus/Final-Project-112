@@ -18,13 +18,15 @@ public class DisplayPicture {
         con = window.getContentPane();
 
         picturePanel = new JPanel();
-        picturePanel.setBounds(150,100,500,300);
-        picturePanel.setBackground(Color.blue);
+        picturePanel.setBounds(150,100,600,500);
+        picturePanel.setBackground(Color.black);
         con.add(picturePanel);
 
         pictureLabel = new JLabel();
 
-        image = new ImageIcon();
+        image = new ImageIcon("unnamed.png");
+        pictureLabel.setIcon(image);
+        picturePanel.add(pictureLabel);
 
         window.setVisible(true);
 
