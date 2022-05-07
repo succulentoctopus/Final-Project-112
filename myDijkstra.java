@@ -10,20 +10,37 @@ public class myDijkstra {
 
 
     public static void main(String[] args) {
-        World w = new World("Tester");
-        createPaths(w,w.totalBuildings.get(0));
-        String str = "thisBuilding A";
-        String[] arrOfStr = str.split(" ",2);
-        for (String s : arrOfStr) {
-            System.out.println(s);
+        new DisplayPicture();
+        World w = new World("AmherstCampus");
+        String s = getUserString("What is the name of your starting location?");
+        String e = getUserString("Which building do you want to end up at?");
+        Building starting = null;
+        Building ending = null;
+        for (Building b : w.totalBuildings) {
+            if (b.name.equals(s)) starting = b;
+            if (b.name.equals(e)) ending = b;
         }
 
-        for (Building b : w.totalBuildings) {
-            System.out.println(b);
-        }
+//        for (Building b : w.totalBuildings) {
+//            System.out.println(b);
+//        }
+        createPaths(w,starting,ending);
 
     }
-    public static void createPaths(World w, Building start) {
+    public static String getUserString(String prompt) {
+        java.util.Scanner scan = new java.util.Scanner(System.in);
+        while(true) {
+            try {
+                System.out.println(prompt);
+                return scan.nextLine();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Bad answer... try again.");
+                scan.nextLine();
+            }
+        }
+    }
+
+    public static void createPaths(World w, Building start, Building end) {
 
         //create list of visited vertices
         ArrayList<Building> visitedBuildings = new ArrayList<Building>();
@@ -75,11 +92,33 @@ public class myDijkstra {
             visitedBuildings.add(currentBuilding);
             unvisitedBuildings.remove(currentBuilding);
         }
+        int distance = 0;
+        for (BuildingDirection bd : table) {
+            if (bd.building.name == end.name) distance = bd.distanceStart;
+        }
+        System.out.println("To get to " + end.name + " you must walk at least " + distance + " meters");
+        System.out.println("The shortest path is " + start.name + shortestPath(start,end,table));
 
         for (BuildingDirection bd : table) {
-            System.out.println(bd.building.name + ": shortest distance from A is: " + bd.distanceStart);
+            System.out.println(bd.building.name + ": shortest distance from " + start.name + " is: " + bd.distanceStart);
             System.out.println("The previous building is: " + bd.prevBuilding.name);
         }
+
+    }
+
+    public static String shortestPath(Building start, Building end, ArrayList<BuildingDirection> table) {
+        String result = "";
+        Building compare = end;
+        while (true) {
+            for (BuildingDirection bd : table) {
+                if (compare == bd.building) {
+                    compare = bd.prevBuilding;
+                    result = ", " + bd.building.name + result;
+                }
+            }
+            if (compare == start) break;
+        }
+        return result;
     }
 
 
