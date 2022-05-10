@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.io.File;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class World {

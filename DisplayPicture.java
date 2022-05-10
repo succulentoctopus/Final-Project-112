@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Container;
 import javax.swing.*;
+//Code taken from https://www.youtube.com/watch?v=LnGfA0vcfuA
 
 public class DisplayPicture {
     JFrame window;

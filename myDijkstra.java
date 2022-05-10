@@ -1,13 +1,6 @@
 import java.util.ArrayList;
 
 public class myDijkstra {
-//    static Building A;
-//    static Building B;
-//    static Building C;
-//    static Building D;
-//    static Building E;
-//    static Building F;
-
 
     public static void main(String[] args) {
         //Display the picture
@@ -114,15 +107,10 @@ public class myDijkstra {
         }
         System.out.println("To get to " + end.name + " you must walk at least " + distance + " meters");
         System.out.println("The shortest path is " + start.name + shortestPath(start, end, table));
-
-        for (BuildingDirection bd : table) {
-            System.out.println(bd.building.name + ": shortest distance from " + start.name + " is: " + bd.distanceStart);
-            System.out.println("The previous building is: " + bd.prevBuilding.name);
-        }
-
     }
-    
+
     public static String shortestPath(Building start, Building end, ArrayList<BuildingDirection> table) {
+        //Returning the actual path taken
         String result = "";
         Building compare = end;
         while (true) {
