@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class myDijkstra {
-
+    
     public static void createPaths(World w, Building start, Building end) {
 
         //create list of visited vertices
@@ -61,6 +61,7 @@ public class myDijkstra {
         }
         System.out.println("To get to " + end.name + " you must walk at least " + distance + " meters");
         System.out.println("The shortest path is " + start.name + shortestPath(start, end, table));
+        timeEstimation(distance);
     }
 
     public static String shortestPath(Building start, Building end, ArrayList<BuildingDirection> table) {
@@ -77,5 +78,30 @@ public class myDijkstra {
             if (compare == start) break;
         }
         return result;
+    }
+    public static double getStepLength(String prompt) {
+        java.util.Scanner stepScanner = new java.util.Scanner(System.in);
+        while (true)
+        {
+            try{
+                System.out.println(prompt);
+                double stepLength = stepScanner.nextDouble();
+                return stepLength;
+            }
+            catch
+            (java.util.InputMismatchException e)
+            {
+                System.out.println("Bad answer... try again.");
+                stepScanner.nextDouble();
+            }
+        }
+    }
+    public static void timeEstimation(int distance) {
+        double unit = getStepLength("What is your average walking speed (mph): ");
+        double toMPS = unit * 1609.34 / 3600;
+        double timeinSeconds = distance/toMPS;
+        int minutes = (int) (timeinSeconds/60);
+        int seconds = (int) (timeinSeconds % 60);
+        System.out.println("Your walking time is: " + minutes + " minutes and " + seconds  + " seconds");
     }
 }
