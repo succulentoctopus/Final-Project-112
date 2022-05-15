@@ -1,0 +1,6 @@
+To compile and run, type in terminal:
+
+javac *.java
+java Main
+
+From there, the program will ask you to type in your starting and ending location.
