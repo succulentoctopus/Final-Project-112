@@ -3,6 +3,12 @@ import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
 
+/*class that creates a "map" of the campus based on the .txt file that is passed into it.
+the .txt file has a list of each building, its neighbors, and the distance between each.
+this class creates a theoretical network from that information. The "world" created in this class is the basis
+for being able to represent Building objects and finding distances between them.
+ */
+
 public class World {
     ArrayList<Building> totalBuildings;
 

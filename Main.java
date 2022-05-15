@@ -1,3 +1,4 @@
+//main class that is used to compile and run the program
 import java.util.ArrayList;
 
 public class Main {
@@ -15,10 +16,12 @@ public class Main {
             if (b.name.equals(s)) starting = b;
             if (b.name.equals(e)) ending = b;
         }
-        //Run Alogrithm
+        //Run algorithm
         myDijkstra.createPaths(w, starting, ending);
 
     }
+
+    //method that takes in user input
     public static String getUserString(String prompt, World w) {
         java.util.Scanner scan = new java.util.Scanner(System.in);
         ArrayList<String> buildingNames = new ArrayList<String>();

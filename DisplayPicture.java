@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Container;
 import javax.swing.*;
 //Code taken from https://www.youtube.com/watch?v=LnGfA0vcfuA
+//class that is used to display the picture of campus
 
 public class DisplayPicture {
     JFrame window;
